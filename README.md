@@ -1,4 +1,4 @@
-# Filexa: File sharing, confined to your network
+# UploadIt: File sharing, confined to your network
 
 This is a simple side project of mine. It began with my [serv](https://github.com/s4Dt0y/serv) project
 implemented in rust (Btw, do not use that, use updog, serv is unstable and feature-lacking).
