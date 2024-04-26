@@ -3,35 +3,41 @@
 {% block title %}Upload{% endblock %}
 
 {% block content %}
-<div class="padding_left">\
 
-    <form method="POST" action="{{ url_for('upload.upload') }}" enctype="multipart/form-data">
-        <div class="dropper dz-clickable" id="myDropzone"></div>
-        <input type="button" name="submit" value="Submit" id="submit">
+<div class="padding_left">
+    <form
+        method="POST"
+        class="dropzone dz-clickable me-3 justify-content-center"
+        id="dropper"
+        enctype="multipart/form-data"
+    >
+        <div class="dz-message align-center" id="upload-icon"><img src="{{ url_for('static', filename='images/upload.png') }}" alt="Drop Files Here to Upload" width="50"></div>
+
     </form>
+    <div class="text-center">
+        <button id="submit-all" class="btn btn-dark mt-3">Upload Files</button>
+    </div>
 
+    <script type="application/javascript">
+        Dropzone.options.dropper = {
+            paramName: "file",
+            chunking: true,
+            forceChunking: true,
+            autoProcessQueue: false,
+            url: "{{ url_for('upload.upload') }}",
+            maxFilesize: 1025, // megabytes
+            chunkSize: 1000000, // bytes
+            init: function() {
+                const uploadButton = document.getElementById('submit-all');
+                let myDropzone = this;
+
+                uploadButton.addEventListener("click", function() {
+                    myDropzone.processQueue();
+                });
+            }
+        }
+
+    </script>
 </div>
 
-<script>
-
-    dropzone.options.myDropzone = {
-        url: "{{ url_for('upload.upload') }}",
-        paramName: "file",
-        autoprocessQueue: false,
-        ignoreHiddenFiles: false,
-        chunking: true,
-        forceChunking: true,
-        maxFilesize: 1025,
-        chunkSize: 10000000,
-        init: function () {
-            dzClozure = this;
-            document.getElementById("submit").addEventListener("click", function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-                dzClosure.processQueue();
-            });
-        }
-    };
-
-</script>
 {% endblock %}
