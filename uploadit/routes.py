@@ -1,16 +1,20 @@
-from utils import random_string, get_config
 from flask import (
-    Flask,
     Blueprint,
     send_file,
     abort,
     redirect,
+    flash,
     url_for,
     render_template,
     request,
     current_app,
 )
 from werkzeug.utils import secure_filename
+import sqlalchemy as sa
+import sqlalchemy.orm as so
+from uploadit import db
+from uploadit.utils import random_string, get_config
+from uploadit.models import File
 from pathlib import Path
 import json
 import os
@@ -21,7 +25,6 @@ upload_page = Blueprint("upload", __name__)
 favicon_page = Blueprint("favicon", __name__)
 
 json_db = get_config()
-print(json_db)
 
 @home_page.route("/", methods=["GET"])
 def index():
@@ -31,13 +34,19 @@ def index():
 def download():
     if request.method == "POST":
         data = request.form
-        requested_id = data.get("download_id")
-        if requested_id != None:
-            valid_id_list = json_db.keys()
-            print(valid_id_list)
-            if requested_id in valid_id_list:
+        requested_key = data.get("download_id")
+        if requested_key != None:
+            query = sa.select(File.filekey)
+            valid_key_list = db.session.scalars(query).all()
+            print(valid_key_list)
+            if requested_key in valid_key_list:
                 upload_dir = current_app.config["UPLOAD_DIRECTORY"]
-                return_file = f'{upload_dir}{json_db[requested_id]}'
+                query = sa.select(File).where(File.filekey == requested_key)
+                file = db.session.scalar(query)
+                if file is None:
+                    flash("Incorrect Filekey")
+                    return redirect(url_for('download.download'))
+                return_file = f'{upload_dir}{file.filename}'
                 return send_file(return_file, as_attachment=True)
             else:
                 return abort(403)
@@ -75,15 +84,13 @@ def upload():
             # This was the last chunk, the file should be complete and the size we expect
             if os.path.getsize(save_path) != int(request.form["dztotalfilesize"]):
                 return "Size mismatch.", 500
-            
-        with open('files.json', 'r') as f:
-            json_data = json.load(f)
 
-        data = {f'{random_string()}': f'{filename}'}
-        json_data.update(data)
+        key = random_string()
+        data = File(filekey=key, filename=filename)
+        db.session.add(data)
+        db.session.commit()
 
-        with open('files.json', 'w') as f:
-            json.dump(json_data, f)
+        flash(f'Upload Complete. The file {key} has been saved with the key {filename}')
         return "Upload Completed", 200
     
     elif request.method == 'GET':
@@ -93,14 +100,3 @@ def upload():
 def favicon():
     return redirect(url_for("static", filename="images/favicon.ico"))
 
-def serve():
-    app = Flask(__name__)
-
-    app.config["UPLOAD_DIRECTORY"] = app.root_path + "/uploads/"
-
-    app.register_blueprint(home_page)
-    app.register_blueprint(download_page)
-    app.register_blueprint(upload_page, url_prefix="/upload")
-    app.register_blueprint(favicon_page)
-
-    return app.run(host="0.0.0.0", port="1212", debug=True)
