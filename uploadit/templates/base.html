@@ -26,6 +26,27 @@
             return false;
         }
     </script>
+    {% if request.path == url_for('upload.upload') %}
+        <script type="application/javascript">
+                Dropzone.options.dropper = {
+                    paramName: "file",
+                    chunking: true,
+                    forceChunking: true,
+                    autoProcessQueue: false,
+                    url: "{{ url_for('upload.upload') }}",
+                    maxFilesize: 1025, // megabytes
+                    chunkSize: 1000000, // bytes
+                    init: function() {
+                        const uploadButton = document.getElementById('submit-all');
+                        let myDropzone = this;
+
+                        uploadButton.addEventListener("click", function() {
+                            myDropzone.processQueue();
+                        });
+                    }
+                }
+        </script>
+    {% endif %}
 
 </head>
 
@@ -52,17 +73,19 @@
                 </div>
         </nav>
     </header>
-    {% block content %}{% endblock %}
+    <div class="container-fluid">
+        {% block content %}{% endblock %}
 
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul class=flashes>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class=flashes>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
 </body>
 
 </html>
