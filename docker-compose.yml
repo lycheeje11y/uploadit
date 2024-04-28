@@ -15,8 +15,8 @@ services:
       timeout: 10s
       retries: 10
       start_period: 10s
-  app:
-    container_name: app
+  uploadit:
+    container_name: uploadit
     build:
       context: .
       dockerfile: Dockerfile
@@ -27,3 +27,4 @@ services:
         condition: service_healthy    
     links: 
         - db
+        

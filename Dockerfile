@@ -5,10 +5,12 @@ RUN apt-get install -y gcc
 
 ENV USERNAME=uploadit
 ENV WORKING_DIR=/home/uploadit
+ENV IS_DOCKER=yes
 
 WORKDIR ${WORKING_DIR}
 
 COPY uploadit uploadit
+COPY uploads uploads
 COPY requirements.txt .
 COPY service_entrypoint.sh .
 

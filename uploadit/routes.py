@@ -1,6 +1,6 @@
 from flask import (
     Blueprint,
-    send_file,
+    send_from_directory,
     abort,
     redirect,
     flash,
@@ -42,8 +42,7 @@ def download():
                 if file is None:
                     flash("Incorrect Filekey")
                     return redirect(url_for('download.download'))
-                return_file = f'{upload_dir}{file.filename}'
-                return send_file(return_file, as_attachment=True)
+                return send_from_directory(upload_dir, file.secure_filename, as_attachment=True, download_name=file.filename)
             else:
                 return abort(403)
         else:
@@ -61,8 +60,8 @@ def upload():
 
         file_uuid = request.form["dzuuid"]
         # Generate a unique filename to avoid overwriting using 8 chars of uuid before filename.
-        filename = f"{file_uuid[:8]}_{secure_filename(file.filename)}"
-        save_path = Path(current_app.config["UPLOAD_DIRECTORY"], filename)
+        secure_filename_var = f"{file_uuid[:8]}_{secure_filename(file.filename)}"
+        save_path = Path(current_app.config["UPLOAD_DIRECTORY"], secure_filename_var)
         current_chunk = int(request.form["dzchunkindex"])
 
         try:
@@ -81,11 +80,11 @@ def upload():
                 return "Size mismatch.", 500
 
         key = random_string()
-        data = File(filekey=key, filename=filename)
+        data = File(filekey=key, filename=file.filename, secure_filename=secure_filename_var)
         db.session.add(data)
         db.session.commit()
 
-        flash(f'Upload Complete. The file {key} has been saved with the key {filename}')
+        flash(f'Upload Complete. The file {secure_filename_var} has been saved with the key {key}')
         return "Upload Completed", 200
     
     elif request.method == 'GET':

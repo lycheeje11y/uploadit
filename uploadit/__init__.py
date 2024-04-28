@@ -4,11 +4,14 @@ from flask_cors import CORS
 from uploadit.config import Config
 from uploadit.database import db
 
+import os
+
 def serve():
     app = Flask(__name__)
     app.config.from_object(Config)
-    app.config["UPLOAD_DIRECTORY"] = app.root_path + "/uploads/"
-   # CORS(app, origins=["http://0.0.0.0:5000"])
+    
+    app.config["UPLOAD_DIRECTORY"] =  os.getcwd() + "/uploads/"
+    CORS(app, origins=["http://0.0.0.0:5000"])
 
     db.init_app(app)
     from uploadit.models import File
