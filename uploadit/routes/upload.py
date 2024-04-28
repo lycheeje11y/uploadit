@@ -1,54 +1,12 @@
-from flask import (
-    Blueprint,
-    send_from_directory,
-    abort,
-    redirect,
-    flash,
-    url_for,
-    render_template,
-    request,
-    current_app,
-)
-from werkzeug.utils import secure_filename
-import sqlalchemy as sa
-import sqlalchemy.orm as so
+from flask import Blueprint, request, abort, flash, redirect ,send_from_directory, render_template, current_app, url_for
 from uploadit import db
-from uploadit.utils import random_string
 from uploadit.models import File
 from pathlib import Path
-import os
 
-home_page = Blueprint("index", __name__)
-download_page = Blueprint("download", __name__)
+import sqlalchemy as sa
+import sqlalchemy.orm as so
+
 upload_page = Blueprint("upload", __name__)
-favicon_page = Blueprint("favicon", __name__)
-
-@home_page.route("/", methods=["GET"])
-def index():
-    return render_template("index.html")
-
-@download_page.route("/download", methods=["POST", "GET"])
-def download():
-    if request.method == "POST":
-        data = request.form
-        requested_key = data.get("download_id")
-        if requested_key != None:
-            query = sa.select(File.filekey)
-            valid_key_list = db.session.scalars(query).all()
-            if requested_key in valid_key_list:
-                upload_dir = current_app.config["UPLOAD_DIRECTORY"]
-                query = sa.select(File).where(File.filekey == requested_key)
-                file = db.session.scalar(query)
-                if file is None:
-                    flash("Incorrect Filekey")
-                    return redirect(url_for('download.download'))
-                return send_from_directory(upload_dir, file.secure_filename, as_attachment=True, download_name=file.filename)
-            else:
-                return abort(403)
-        else:
-            return abort(422)
-    elif request.method == "GET":
-        return render_template("download.html")
 
 @upload_page.route('/', methods=['POST', 'GET'])
 def upload():
@@ -89,8 +47,3 @@ def upload():
     
     elif request.method == 'GET':
         return render_template('upload.html')
-
-@favicon_page.route("/favicon.ico")
-def favicon():
-    return redirect(url_for("static", filename="images/favicon.ico"))
-

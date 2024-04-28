@@ -3,7 +3,7 @@ from flask_migrate import Migrate
 from flask_cors import CORS
 from uploadit.config import Config
 from uploadit.database import db
-
+from uploadit.routes import download_page, upload_page, home_page, favicon_page
 import os
 
 def serve():
