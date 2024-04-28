@@ -13,18 +13,15 @@ from werkzeug.utils import secure_filename
 import sqlalchemy as sa
 import sqlalchemy.orm as so
 from uploadit import db
-from uploadit.utils import random_string, get_config
+from uploadit.utils import random_string
 from uploadit.models import File
 from pathlib import Path
-import json
 import os
 
 home_page = Blueprint("index", __name__)
 download_page = Blueprint("download", __name__)
 upload_page = Blueprint("upload", __name__)
 favicon_page = Blueprint("favicon", __name__)
-
-json_db = get_config()
 
 @home_page.route("/", methods=["GET"])
 def index():
@@ -38,7 +35,6 @@ def download():
         if requested_key != None:
             query = sa.select(File.filekey)
             valid_key_list = db.session.scalars(query).all()
-            print(valid_key_list)
             if requested_key in valid_key_list:
                 upload_dir = current_app.config["UPLOAD_DIRECTORY"]
                 query = sa.select(File).where(File.filekey == requested_key)
@@ -67,7 +63,6 @@ def upload():
         # Generate a unique filename to avoid overwriting using 8 chars of uuid before filename.
         filename = f"{file_uuid[:8]}_{secure_filename(file.filename)}"
         save_path = Path(current_app.config["UPLOAD_DIRECTORY"], filename)
-        print(save_path)
         current_chunk = int(request.form["dzchunkindex"])
 
         try:
