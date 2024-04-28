@@ -1,4 +1,14 @@
-from flask import Blueprint, request, abort, flash, redirect ,send_from_directory, render_template, current_app, url_for
+from flask import (
+    Blueprint,
+    request,
+    abort,
+    flash,
+    redirect,
+    send_from_directory,
+    render_template,
+    current_app,
+    url_for,
+)
 from uploadit import db
 from uploadit.models import File
 
@@ -8,7 +18,7 @@ import sqlalchemy.orm as so
 download_page = Blueprint("download", __name__)
 
 
-@download_page.route("/download", methods=["POST", "GET"])
+@download_page.route("/", methods=["POST", "GET"])
 def download():
     if request.method == "POST":
         data = request.form
@@ -22,8 +32,13 @@ def download():
                 file = db.session.scalar(query)
                 if file is None:
                     flash("Incorrect Filekey")
-                    return redirect(url_for('download.download'))
-                return send_from_directory(upload_dir, file.secure_filename, as_attachment=True, download_name=file.filename)
+                    return redirect(url_for("download.download"))
+                return send_from_directory(
+                    upload_dir,
+                    file.secure_filename,
+                    as_attachment=True,
+                    download_name=file.filename,
+                )
             else:
                 return abort(403)
         else:

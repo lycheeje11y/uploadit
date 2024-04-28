@@ -1,16 +1,28 @@
-from flask import Blueprint, request, abort, flash, redirect ,send_from_directory, render_template, current_app, url_for
+from flask import (
+    Blueprint,
+    request,
+    flash,
+    redirect,
+    render_template,
+    current_app,
+    url_for,
+)
 from uploadit import db
 from uploadit.models import File
+from uploadit.utils import random_string
+from werkzeug.utils import secure_filename
 from pathlib import Path
+import os
 
 import sqlalchemy as sa
 import sqlalchemy.orm as so
 
 upload_page = Blueprint("upload", __name__)
 
-@upload_page.route('/', methods=['POST', 'GET'])
+
+@upload_page.route("/", methods=["POST", "GET"])
 def upload():
-    if request.method == 'POST':
+    if request.method == "POST":
         try:
             file = request.files["file"]
         except KeyError:
@@ -27,7 +39,7 @@ def upload():
                 f.seek(int(request.form["dzchunkbyteoffset"]))
                 f.write(file.stream.read())
         except OSError as e:
-            print(f'Error: {e}')
+            print(f"Error: {e}")
             return "Error saving file.", 500
 
         total_chunks = int(request.form["dztotalchunkcount"])
@@ -38,12 +50,16 @@ def upload():
                 return "Size mismatch.", 500
 
         key = random_string()
-        data = File(filekey=key, filename=file.filename, secure_filename=secure_filename_var)
+        data = File(
+            filekey=key, filename=file.filename, secure_filename=secure_filename_var
+        )
         db.session.add(data)
         db.session.commit()
 
-        flash(f'Upload Complete. The file {secure_filename_var} has been saved with the key {key}')
-        return "Upload Completed", 200
-    
-    elif request.method == 'GET':
-        return render_template('upload.html')
+        flash(
+            f"Upload Complete. The file {secure_filename_var} has been saved with the key {key}"
+        )
+        return redirect(url_for("upload.upload"))
+
+    elif request.method == "GET":
+        return render_template("upload.html")

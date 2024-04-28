@@ -13,6 +13,7 @@ favicon_page = Blueprint("favicon", __name__)
 def index():
     return render_template("index.html")
 
+
 @favicon_page.route("/favicon.ico")
 def favicon():
     return redirect(url_for("static", filename="images/favicon.ico"))
