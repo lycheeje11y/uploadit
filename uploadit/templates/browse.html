@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}List{% endblock %}
+
+{% block content %}
+    <div class="padding_left">
+        <ul>
+            {% for file in files %}
+                <li>Name: {{ file.filename }}; Key: {{ file.filekey }} </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

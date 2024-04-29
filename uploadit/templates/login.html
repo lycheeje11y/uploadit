@@ -3,7 +3,7 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-    <form action="{{ url_for('login.login') }}" method="post" novalidate>
+    <form action="{{ url_for('users.login') }}" method="post" novalidate>
         {{ form.hidden_tag() }}
         <p>
             {{ form.username.label }}<br>
@@ -22,4 +22,6 @@
         <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
         <p>{{ form.submit() }}</p>
     </form>
+    <p>New User? <a href="{{ url_for('users.register') }}">Click to Register!</a></p>
+
 {% endblock %}

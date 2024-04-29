@@ -33,6 +33,7 @@ def download():
                 if file is None:
                     flash("Incorrect Filekey")
                     return redirect(url_for("download.download"))
+                print(file.secure_filename)
                 return send_from_directory(
                     upload_dir,
                     file.secure_filename,

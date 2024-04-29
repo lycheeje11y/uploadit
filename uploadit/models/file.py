@@ -1,9 +1,6 @@
-from typing import Optional
 import sqlalchemy as sa
-import sqlalchemy.orm as so
 from uploadit import db
 import datetime
-
 
 class File(db.Model):
     __tablename__ = "files"
@@ -20,4 +17,4 @@ class File(db.Model):
         self.secure_filename = secure_filename
 
     def __repr__(self):
-        return f"Filename: {self.filename}; secure_filename: {self.secure_filename}; key: {self.filekey}"
+        return f"<Filename: {self.filename}; secure_filename: {self.secure_filename}; key: {self.filekey}>"
