@@ -7,6 +7,7 @@ from flask import (
     current_app,
     url_for,
 )
+from flask_login import current_user, login_required
 from uploadit import db
 from uploadit.models import File
 from uploadit.utils import random_string
@@ -21,6 +22,7 @@ upload_page = Blueprint("upload", __name__)
 
 
 @upload_page.route("/", methods=["POST", "GET"])
+@login_required
 def upload():
     if request.method == "POST":
         try:
@@ -48,10 +50,10 @@ def upload():
             # This was the last chunk, the file should be complete and the size we expect
             if os.path.getsize(save_path) != int(request.form["dztotalfilesize"]):
                 return "Size mismatch.", 500
-
+        
         key = random_string()
         data = File(
-            filekey=key, filename=file.filename, secure_filename=secure_filename_var
+            filekey=key, filename=file.filename, secure_filename=secure_filename_var, uploader=current_user
         )
         db.session.add(data)
         db.session.commit()

@@ -48,4 +48,6 @@ def logout():
     logout_user()
     return redirect(url_for('users.login'))
 
-
+@user_routes.route('/profile')
+def profile():
+    pass
