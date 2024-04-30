@@ -4,34 +4,43 @@
     <h1>Register</h1>
     <form action="" method="post">
         {{ form.hidden_tag() }}
-        <p>
-            {{ form.username.label }}<br>
-            {{ form.username(size=32) }}<br>
-            {% for error in form.username.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.email.label }}<br>
-            {{ form.email(size=64) }}<br>
-            {% for error in form.email.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.password.label }}<br>
-            {{ form.password(size=32) }}<br>
-            {% for error in form.password.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.password2.label }}<br>
-            {{ form.password2(size=32) }}<br>
-            {% for error in form.password2.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>{{ form.submit() }}</p>
+        <div class="form-group">
+            <p>
+                {{ form.username.label }}<br>
+                {{ form.username(class="form-control") }}
+                {% for error in form.username.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+        </div>
+        <div class="form-group">
+            <p>
+                {{ form.email.label }} <small class="form-text text-muted">(We'll never share your email with anyone else.)</small>
+                <br>
+                {{ form.email(class="form-control") }}
+                {% for error in form.email.errors %}
+                <span class="invalid-feedback">{{ error }}</span>
+                {% endfor %}
+            </p>
+        </div>
+        <div class="form-group">
+            <p>
+                {{ form.password.label }}<br>
+                {{ form.password(class="form-control") }}<br>
+                {% for error in form.password.errors %}
+                <span class="invalid-feedback">{{ error }}</span>
+                {% endfor %}
+            </p>
+        </div>
+        <div class="form-group">
+            <p>
+                {{ form.password2.label }}<br>
+                {{ form.password2(class="form-control") }}<br>
+                {% for error in form.password2.errors %}
+                <span class="invalid-feedback">{{ error }}</span>
+                {% endfor %}
+            </p>
+        </div>
+        <p>{{ form.submit(class="btn btn-dark") }}</p>
     </form>
 {% endblock %}
