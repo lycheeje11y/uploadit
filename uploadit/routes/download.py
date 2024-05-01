@@ -31,7 +31,7 @@ def download():
                 query = sa.select(File).where(File.filekey == requested_key)
                 file = db.session.scalar(query)
                 if file is None:
-                    flash("Incorrect Filekey")
+                    abort(500)
                     return redirect(url_for("download.download"))
                 print(file.secure_filename)
                 return send_from_directory(
@@ -41,7 +41,8 @@ def download():
                     download_name=file.filename,
                 )
             else:
-                return abort(403)
+                flash("Incorrect Filekey", 'error')
+                return redirect(url_for('download.download'))
         else:
             return abort(422)
     elif request.method == "GET":

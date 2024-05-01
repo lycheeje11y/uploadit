@@ -19,7 +19,7 @@ def login():
             sa.select(User).where(User.username == form.username.data)
         )
         if user is None or not user.check_password(form.password.data):
-            flash('Invalid username or password')
+            flash('Invalid username or password', 'error')
             return redirect(url_for('users.login'))
         login_user(user, remember=form.remember_me.data)
         return redirect(url_for('index.index'))
@@ -29,7 +29,7 @@ def login():
 @user_routes.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
-        flash(f'You are already logged in as {current_user.username}')
+        flash(f'You are already logged in as {current_user.username}', 'alert')
         return redirect(url_for('index.index'))
     form = RegistrationForm(request.form)
     if form.validate_on_submit():
@@ -37,7 +37,7 @@ def register():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash(f'Welcome to the uploadit community, {user.username}')
+        flash(f'Welcome to the uploadit community, {user.username}', 'alert')
         login_user(user)
         return redirect(url_for('index.index'))
     

@@ -59,7 +59,7 @@ def upload():
         db.session.commit()
 
         flash(
-            f"Upload Complete. The file {secure_filename_var} has been saved with the key {key}"
+            f"Upload Complete. The file {secure_filename_var} has been saved with the key {key}", 'error'
         )
         return redirect(url_for("upload.upload"))
 
