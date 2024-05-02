@@ -30,8 +30,6 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
     
-
-
 class File(db.Model):
     __tablename__ = "files"
 
@@ -46,3 +44,4 @@ class File(db.Model):
 
     def __repr__(self):
         return f"<File: {self.filename}"    
+    

@@ -36,7 +36,6 @@ def create_app():
     app.register_blueprint(home_page)
     app.register_blueprint(download_page, url_prefix='/download')
     app.register_blueprint(upload_page, url_prefix='/upload')
-    app.register_blueprint(browse_page, url_prefix='/browse')
     app.register_blueprint(user_routes, url_prefix='/u')
     app.register_blueprint(favicon_page)
 

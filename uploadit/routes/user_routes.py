@@ -22,6 +22,7 @@ def login():
             flash('Invalid username or password', 'error')
             return redirect(url_for('users.login'))
         login_user(user, remember=form.remember_me.data)
+        flash(f'Welcome back, {user.username}', 'alert')
         return redirect(url_for('index.index'))
 
     return render_template("login.html", form=form)
@@ -45,6 +46,7 @@ def register():
 
 @user_routes.route('/logout')
 def logout():
+    flash(f'See ya, {current_user.username}', 'alert')
     logout_user()
     return redirect(url_for('users.login'))
 

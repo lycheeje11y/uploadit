@@ -46,4 +46,6 @@ def download():
         else:
             return abort(422)
     elif request.method == "GET":
-        return render_template("download.html")
+        query = db.session.query(File)
+        results = db.session.scalars(query).all()
+    return render_template("download.html", files=results)
