@@ -1,9 +1,12 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary d-flex mb-3" id="mynavbar">
+<nav class="navbar navbar-expand-lg bg-body-tertiary d-flex mb-3 bg-dark border-bottom border-body" id="mynavbar">
     <div class="container-fluid">
-        <a class="navbar-brand fs-2" href="{{ url_for("index.index") }}">
+        <a class="navbar-brand fs-3" href="{{ url_for("index.index") }}">
             {% if request.path == url_for('download.download') %}DownloadIt{% else %}UploadIt{% endif %}
         </a>
-        <div class="collapse navbar-collapse fs-4" id="navbarNav">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        <div class="collapse navbar-collapse fs-5" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link {{'active' if request.path == url_for('download.download')}}"
@@ -14,11 +17,11 @@
                         aria-current="page" href="{{ url_for("upload.upload") }}">Upload</a>
                 </li>
                 {% if current_user.is_anonymous %}
-                <li class="nav-item dropdown btn-group" style="position:absolute; right:0;">
-                    <button class="btn btn-outline-dark dropdown-toggle me-4 mt-1" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <li class="nav-item dropdown btn-group" style="position:absolute; right:5%; width: 10%">
+                    <button class="btn btn-outline-primary dropdown-toggle text-white mt-1 me-4" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                         Login
                     </button>
-                    <ul class="dropdown-menu me-3">
+                    <ul class="dropdown-menu dropdown-menu-right me-4">
                         <li><a class="nav-link {{'active' if request.path == url_for('users.login')}}"
                             aria-current="page" href="{{ url_for("users.login") }}">Login</a></li>
                         <li><a class="dropdown-item" href="#"><a class="nav-link {{'active' if request.path == url_for('users.register')}}"
