@@ -165,6 +165,9 @@ migrations/*
 pData/*
 uploads/*
 
+.env
+.flaskenv
+
 !migrations/.gitkeep
 !pData/.gitkeep
 !uploads/.gitkeep

@@ -1,4 +1,5 @@
 FLASK_APP=uploadit:create_app
-FLASK_DEBUG=True
+FLASK_DEBUG=0
 FLASK_RUN_PORT = 8008
 FLASK_RUN_HOST = "0.0.0.0"
+FLASK_SECRET_KEY = "secret key"
