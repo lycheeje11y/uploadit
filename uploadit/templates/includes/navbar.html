@@ -24,9 +24,9 @@
                             Login
                         </button>
                         <ul class="dropdown-menu dropdown-menu-right me-4">
-                            <li><a class="nav-link {{'active' if request.path == url_for('users.login')}}"
+                            <li><a class="nav-link link-dark {{'active' if request.path == url_for('users.login')}}"
                                 aria-current="page" href="{{ url_for("users.login") }}">Login</a></li>
-                            <li><a class="dropdown-item" href="#"><a class="nav-link {{'active' if request.path == url_for('users.register')}}"
+                            <li><a class="dropdown-item" href="#"><a class="nav-link link-dark{{'active' if request.path == url_for('users.register')}}"
                                 aria-current="page" href="{{ url_for("users.register") }}">Register</a></a></li>
                         </ul>
                     </li>

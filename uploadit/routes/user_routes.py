@@ -41,6 +41,8 @@ def register():
         flash(f'Welcome to the uploadit community, {user.username}', 'alert')
         login_user(user)
         return redirect(url_for('index.index'))
+    elif not form.validate_email:
+        return "Invalid Email Address", 500
     
     return render_template('register.html', form=form)
 

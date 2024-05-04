@@ -1,11 +1,56 @@
+/* @font-face {
+    font-family: 'Teachers';
+    src: url('/static/fonts/teacher/Teachers-Regular.ttf');
+}
+
+.text {
+    color: lightgray;
+}
+
+
+body {
+    font-family: "Teachers", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
 .masthead {
+    width: 100%;
+    background: linear-gradient(to bottom right, black, white);
     background-size: cover;
     min-height: 60vh;
     position: relative;
     color: white;
-    text-shadow: 2px 2px 2px rgba(0,0,0,.2)
+    text-shadow: 2px 2px 2px rgba(0,0,0,.2);
+    border-radius: 0 0 5px 0;
 }
 
+.effect-slide-in {
+    animation: slide-in 0.5s linear 1;
+}
+
+@keyframes slide-in {
+    0% {
+        transform: translateY(-600%)
+    } 
+    75% {
+        transform: translateY(25%)
+    }
+    100% {
+        transform: translateY(0)
+    }
+}
+
+.masthead h1 {
+    position: absolute;
+    color: #00FFFF;
+}
+
+.masthead h5 {
+    color: #C0C0C0;
+    margin-top: 10%;
+}
 
 .color-overlay {
     position: absolute;
@@ -22,4 +67,4 @@
     h1 {
         font-size: calc(1.525rem + 3.3vw);
     }
-}
+} */
