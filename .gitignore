@@ -164,6 +164,7 @@ cython_debug/
 migrations/*
 pData/*
 uploads/*
+logs/*
 
 .env
 .flaskenv
@@ -171,3 +172,4 @@ uploads/*
 !migrations/.gitkeep
 !pData/.gitkeep
 !uploads/.gitkeep
+!logs/.gitkeep
