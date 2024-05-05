@@ -1,7 +1,8 @@
 from flask import render_template, Blueprint, url_for, flash, redirect, request
 from flask_login import current_user, login_user, logout_user
 import sqlalchemy as sa
-from uploadit.forms import LoginForm, RegistrationForm
+from uploadit.forms import LoginForm, RegistrationForm, ResetPasswordRequestForm, ResetPasswordForm
+from uploadit.email import send_password_reset_email
 from uploadit.models import User
 from uploadit import db
 
@@ -45,6 +46,42 @@ def register():
         return "Invalid Email Address", 500
     
     return render_template('register.html', form=form)
+
+@user_routes.route('/reset_password_request', methods=['GET', 'POST'])
+def reset_password_request():
+    if current_user.is_authenticated:
+        flash(f'You are already logged in as {current_user.username}', 'alert')
+        return redirect(url_for('index.index'))
+    form = ResetPasswordRequestForm(request.form)
+    if form.validate_on_submit and request.method == 'POST':
+        user = db.session.scalar(sa.select(User).where(User.email == form.email.data))
+        if user:
+            send_password_reset_email(user)
+        flash('Check your email for the instructions to reset your password', 'alert')
+        return redirect(url_for('users.login'))
+    
+    return render_template('reset_password_request.html', form=form)
+
+@user_routes.route('reset_password/<token>', methods=['GET', 'POST'])
+def reset_password(token):
+    if current_user.is_authenticated:
+        flash(f'You are already logged in as {current_user.username}', 'alert')
+        return redirect(url_for('index.index'))
+    user = User.verify_reset_password_token(token)
+    if not user:
+        flash('Token verification failed', 'error')
+        return redirect(url_for('index.index'))
+    form = ResetPasswordForm(request.form)
+    if form.validate_on_submit():
+        print("token_validated")
+        user.set_password(form.password.data)
+        db.session.commit()
+        flash('You password has been reset', 'alert')
+
+        return redirect(url_for('users.login'))
+    
+    return render_template('reset_password.html', form=form)
+
 
 @user_routes.route('/logout')
 def logout():

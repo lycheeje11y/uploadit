@@ -7,7 +7,12 @@
 // Scripts
 // 
 
+
+
 window.addEventListener('DOMContentLoaded', event => {
+
+    const toastElList = document.querySelectorAll('.toast')
+    const toastList = [...toastElList].map(toastEl => new bootstrap.Toast(toastEl))
 
     // Navbar shrink function
     var navbarShrink = function () {

@@ -13,18 +13,45 @@
         <!-- Icon Divider-->
         <div class="divider-custom divider-light">
             <div class="divider-custom-line"></div>
-            <div class="divider-custom-icon"><i class="fas fa-wifi"></i></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
             <div class="divider-custom-line"></div>
         </div>
         <!-- Masthead Subheading-->
         <p class="masthead-subheading font-weight-light">Upload - Download</p>
     </div>
 </header>
+
+<!-- About Section-->
+<section class="page-section mb-0" id="about">
+    <div class="container">
+        <!-- About Section Heading-->
+        <h2 class="page-section-heading text-center text-uppercase">Welcome to UploadIt</h2>
+        <!-- Icon Divider-->
+        <div class="divider-custom divider-light">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <!-- About Section Content-->
+        <div class="row">
+            <div class="col-lg-4 ms-auto"><p class="lead">Hiya! I'm s4xD_t0y, the thirteen year old who built <i>UploadIt</i>...Feel free to open an issue at the Github repo if you find a bug or have a feature-request.</p></div>
+            <div class="col-lg-4 me-auto"><p class="lead">If all you want to do is download a file, then no account is required! Take the tour below to begin your journey at UploadIt.</p></div>
+        </div>
+        <!-- About Section Button-->
+        <div class="text-center mt-4">
+            <button class="btn btn-xl btn-primary" id="btn" onclick="changeText()">
+                <i class="fas fa-download me-2"></i>
+                <span id="conversationText">Do absolutely nothing!</span>
+            </button>
+        </div>
+    </div>
+</section>
+
 <!-- Portfolio Section-->
-<section class="page-section portfolio" id="portfolio">
+<section class="page-section portfolio bg-primary" id="portfolio">
     <div class="container">
         <!-- Portfolio Section Heading-->
-        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Portfolio</h2>
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">UploadIt Tour</h2>
         <!-- Icon Divider-->
         <div class="divider-custom">
             <div class="divider-custom-line"></div>
@@ -39,82 +66,33 @@
                     <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                         <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                     </div>
-                    <img class="img-fluid" src="{{ url_for('static', filename='images/portfolio/cabin.png') }}" alt="..." />
+                     <img class="img-fluid" src="{{ url_for('static', filename='images/portfolio/cabin.png') }}" alt="..." />
                 </div>
             </div>
+
             <!-- Portfolio Item 2-->
-            <div class="col-md-6 col-lg-4 mb-5">
-                <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal2">
-                    <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                        <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-                    </div>
-                    <img class="img-fluid" src="{{ url_for('static', filename='images/portfolio/cake.png') }}" alt="..." />
-                </div>
-            </div>
-            <!-- Portfolio Item 3-->
-            <div class="col-md-6 col-lg-4 mb-5">
-                <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal3">
-                    <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                        <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-                    </div>
-                    <img class="img-fluid" src="{{ url_for('static', filename='images/portfolio/circus.png') }}" alt="..." />
-                </div>
-            </div>
-            <!-- Portfolio Item 4-->
-            <div class="col-md-6 col-lg-4 mb-5 mb-lg-0">
-                <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal4">
-                    <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                        <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-                    </div>
-                    <img class="img-fluid" src="{{ url_for('static', filename='images/portfolio/game.png') }}" alt="..." />
-                </div>
-            </div>
-            <!-- Portfolio Item 5-->
             <div class="col-md-6 col-lg-4 mb-5 mb-md-0">
-                <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal5">
+                <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal2">
                     <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                         <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                     </div>
                     <img class="img-fluid" src="{{ url_for('static', filename='images/portfolio/safe.png') }}" alt="..." />
                 </div>
             </div>
-            <!-- Portfolio Item 6-->
-            <div class="col-md-6 col-lg-4">
-                <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal6">
+
+            <!-- Portfolio Item 3-->
+            <div class="col-md-6 col-lg-4 mb-5 mb-lg-0">
+                <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal3">
                     <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                         <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                     </div>
-                    <img class="img-fluid" src="{{ url_for('static', filename='images/portfolio/submarine.png') }}" alt="..." />
+                    <img class="img-fluid" src="{{ url_for('static', filename='images/portfolio/game.png') }}" alt="..." />
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!-- About Section-->
-<section class="page-section bg-primary text-white mb-0" id="about">
-    <div class="container">
-        <!-- About Section Heading-->
-        <h2 class="page-section-heading text-center text-uppercase text-white">About</h2>
-        <!-- Icon Divider-->
-        <div class="divider-custom divider-light">
-            <div class="divider-custom-line"></div>
-            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-            <div class="divider-custom-line"></div>
-        </div>
-        <!-- About Section Content-->
-        <div class="row">
-            <div class="col-lg-4 ms-auto"><p class="lead">Hiya! I'm s4xD_t0y, the thirteen year old who built <i>UploadIt</i>...Feel free to open an issue at the Github repo if you find a bug or have a feature-request.</p></div>
-            <div class="col-lg-4 me-auto"><p class="lead">If all you want to do is download a file, then no account is required! However, we do recommend that you make one super quickly so that you upload and browse files.</p></div>
-        </div>
-        <!-- About Section Button-->
-        <div class="text-center mt-4">
-            <button class="btn btn-xl btn-outline-light" onclick="changeText()">
-                <i class="fas fa-download me-2"></i>
-                <span id="conversationText">Do absolutely nothing!</span>
-            </button>
-        </div>
-    </div>
-</section>
+
 
 <!-- Footer-->
 <footer class="footer text-center">
@@ -162,7 +140,7 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
                             <!-- Portfolio Modal - Title-->
-                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Log Cabin</h2>
+                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Simple</h2>
                             <!-- Icon Divider-->
                             <div class="divider-custom">
                                 <div class="divider-custom-line"></div>
@@ -170,9 +148,10 @@
                                 <div class="divider-custom-line"></div>
                             </div>
                             <!-- Portfolio Modal - Image-->
-                            <img class="img-fluid rounded mb-5" src="assets/img/portfolio/cabin.png" alt="..." />
+                            <i class="fa-solid fa-code fa-2xl mb-4"></i>                            
+                            
                             <!-- Portfolio Modal - Text-->
-                            <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+                            <p class="mb-4">UploadIt is not like other file sharing services you have used. We do file uploading and file downloading with no fluff in between. Our main priorities are the user, performance, and speed.</p>
                             <button class="btn btn-primary" data-bs-dismiss="modal">
                                 <i class="fas fa-xmark fa-fw"></i>
                                 Close Window
@@ -184,6 +163,7 @@
         </div>
     </div>
 </div>
+
 <!-- Portfolio Modal 2-->
 <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" aria-labelledby="portfolioModal2" aria-hidden="true">
     <div class="modal-dialog modal-xl">
@@ -194,7 +174,7 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
                             <!-- Portfolio Modal - Title-->
-                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Tasty Cake</h2>
+                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Secure</h2>
                             <!-- Icon Divider-->
                             <div class="divider-custom">
                                 <div class="divider-custom-line"></div>
@@ -202,9 +182,9 @@
                                 <div class="divider-custom-line"></div>
                             </div>
                             <!-- Portfolio Modal - Image-->
-                            <img class="img-fluid rounded mb-5" src="assets/img/portfolio/cake.png" alt="..." />
+                            <i class="fa-solid fa-lock fa-2xl mb-4"></i>                            
                             <!-- Portfolio Modal - Text-->
-                            <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+                            <p class="mb-4">We want to make sure that file you are downloading is the file you expect. This service will likely be used to host malware traps for unsuspecting users. If you find a sketchy file, please report it.</p>
                             <button class="btn btn-primary" data-bs-dismiss="modal">
                                 <i class="fas fa-xmark fa-fw"></i>
                                 Close Window
@@ -216,40 +196,9 @@
         </div>
     </div>
 </div>
+
 <!-- Portfolio Modal 3-->
 <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" aria-labelledby="portfolioModal3" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
-            <div class="modal-body text-center pb-5">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8">
-                            <!-- Portfolio Modal - Title-->
-                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Circus Tent</h2>
-                            <!-- Icon Divider-->
-                            <div class="divider-custom">
-                                <div class="divider-custom-line"></div>
-                                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                                <div class="divider-custom-line"></div>
-                            </div>
-                            <!-- Portfolio Modal - Image-->
-                            <img class="img-fluid rounded mb-5" src="assets/img/portfolio/circus.png" alt="..." />
-                            <!-- Portfolio Modal - Text-->
-                            <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
-                            <button class="btn btn-primary" data-bs-dismiss="modal">
-                                <i class="fas fa-xmark fa-fw"></i>
-                                Close Window
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Portfolio Modal 4-->
-<div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" aria-labelledby="portfolioModal4" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
@@ -266,13 +215,15 @@
                                 <div class="divider-custom-line"></div>
                             </div>
                             <!-- Portfolio Modal - Image-->
-                            <img class="img-fluid rounded mb-5" src="assets/img/portfolio/game.png" alt="..." />
+                            <i class="fa-solid fa-door-open mb-4 fa-2xl"></i>
                             <!-- Portfolio Modal - Text-->
-                            <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
-                            <button class="btn btn-primary" data-bs-dismiss="modal">
-                                <i class="fas fa-xmark fa-fw"></i>
-                                Close Window
-                            </button>
+                            <p class="mb-4">So, let's get started. We would like to welcome you into the UploadIt community!</p>
+
+                            <a href="{{ url_for('users.register') }}" class="btn btn-primary">
+                                    Sign Up Now
+                                    <i class="fa-solid fa-right-to-bracket"></i>
+                            </a>
+
                         </div>
                     </div>
                 </div>
@@ -280,70 +231,7 @@
         </div>
     </div>
 </div>
-<!-- Portfolio Modal 5-->
-<div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" aria-labelledby="portfolioModal5" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
-            <div class="modal-body text-center pb-5">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8">
-                            <!-- Portfolio Modal - Title-->
-                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Locked Safe</h2>
-                            <!-- Icon Divider-->
-                            <div class="divider-custom">
-                                <div class="divider-custom-line"></div>
-                                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                                <div class="divider-custom-line"></div>
-                            </div>
-                            <!-- Portfolio Modal - Image-->
-                            <img class="img-fluid rounded mb-5" src="assets/img/portfolio/safe.png" alt="..." />
-                            <!-- Portfolio Modal - Text-->
-                            <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
-                            <button class="btn btn-primary" data-bs-dismiss="modal">
-                                <i class="fas fa-xmark fa-fw"></i>
-                                Close Window
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Portfolio Modal 6-->
-<div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" aria-labelledby="portfolioModal6" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
-            <div class="modal-body text-center pb-5">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8">
-                            <!-- Portfolio Modal - Title-->
-                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Submarine</h2>
-                            <!-- Icon Divider-->
-                            <div class="divider-custom">
-                                <div class="divider-custom-line"></div>
-                                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                                <div class="divider-custom-line"></div>
-                            </div>
-                            <!-- Portfolio Modal - Image-->
-                            <img class="img-fluid rounded mb-5" src="assets/img/portfolio/submarine.png" alt="..." />
-                            <!-- Portfolio Modal - Text-->
-                            <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
-                            <button class="btn btn-primary" data-bs-dismiss="modal">
-                                <i class="fas fa-xmark fa-fw"></i>
-                                Close Window
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 <script>
     function changeText() {
@@ -359,7 +247,9 @@
         else if (text == "Okay, now we're done. Period period.") elem.innerHTML = "IK YOU CAN'T HAVE TWO PERIODS!!!!"
         else if (text == "IK YOU CAN'T HAVE TWO PERIODS!!!!") elem.innerHTML = "I WAS TRYING TO MAKE A POINT!!!!"
         else if (text == "I WAS TRYING TO MAKE A POINT!!!!") elem.innerHTML = "Ugh...I think I'm blacking out."
-        else if (text == "Ugh...I think I'm blacking out.") elem.innerHTML = "Do absolutely nothing!"
+        else if (text == "Ugh...I think I'm blacking out.") document.getElementById('conversationText').disabled = true;
+
     }
+
 </script>
 {% endblock %}

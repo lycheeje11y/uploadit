@@ -1,10 +1,12 @@
 import sqlalchemy as sa
 import sqlalchemy.orm as so
-from uploadit import db
+from time import time
+from uploadit import db, app
 from typing import Optional
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime, timezone
+import jwt
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -29,6 +31,21 @@ class User(db.Model, UserMixin):
     
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+    
+    def get_reset_password_token(self, expires_in=600):
+        return jwt.encode(
+            {'reset_password': self.id, 'exp': time() + expires_in},
+            app.config['SECRET_KEY'], algorithm='HS256'
+        )
+    
+    @staticmethod 
+    def verify_reset_password_token(token):
+        try:
+            id = jwt.decode(token, app.config['SECRET_KEY'], algorithms='HS256')['reset_password']
+        except:
+            return
+        
+        return db.session.get(User, id)
     
 class File(db.Model):
     __tablename__ = "files"

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="dark">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -16,7 +16,7 @@
     <script src="{{ url_for('static', filename='vendor/popper/popper.min.js') }}"></script>
     <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ url_for('static', filename='vendor/dropzone/dropzone.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
     <script src="{{ url_for('static', filename='js/landing.js') }}"></script>
 
     {% if request.path == url_for('download.download') %}
@@ -33,31 +33,40 @@
 <body>
     <header class="sticky-top">
         {% include "includes/navbar.html" %}
-        <div class="container-fluid">
-            {% with alerts = get_flashed_messages(category_filter=["alert"]) %}
-            {% if alerts %}
-                {% for alert in alerts %}
-                    <div class="alert alert-warning alert-dismissible fade show">
-                        {{ alert }}
+
+        {% with errors = get_flashed_messages(category_filter=['error']) %}
+            {% if errors %}
+                {% for error in errors %}
+                    <div class="alert alert-danger alert-dismissible fade show shadow mx-3" role="alert" style="z-index: 1040">
+                        <strong>Error!</strong>: {{ error }}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 {% endfor %}
             {% endif %}
-            {% endwith %}
+        {% endwith %}
 
-            {% with errors = get_flashed_messages(category_filter=["error"]) %}
-            {% if errors %}
-                <ul class="list-group">
-                {% for error in errors %}
-                    <li class="list-group-item list-group-item-danger pb-3">{{ error }}</li>
-                {% endfor %}
-                </ul>
-            {% endif %}
+        <div class="container-fluid position-fixed p-3" style="z-index: 1050" id="messages">
+            {% with messages = get_flashed_messages(category_filter=['alert']) %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="toast-container position-static message">
+                            <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="toast-header">
+                                    <i class="fa-regular fa-bell me-3 fa-sm"></i>                                  
+                                    <strong class="me-auto">UploadIt Alert</strong>
+                                    <div>
+                                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                                    </div>
+                                </div>
+                                <div class="toast-body">
+                                    {{ message }}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
             {% endwith %}
         </div>
-
-
-
     </header>
     <div class="{% if request.path != url_for('index.index') %} container-fluid {% endif %}" >
         {% block content %}{% endblock %}

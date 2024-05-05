@@ -25,7 +25,7 @@ ENV PATH "$PATH:/home/${USERNAME}/.local/bin"
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-ENV FLASK_APP=uploadit:create_app
+ENV FLASK_APP=uploadit:app
 
 RUN chmod +x service_entrypoint.sh
 
