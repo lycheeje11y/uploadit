@@ -37,7 +37,7 @@
         {% with errors = get_flashed_messages(category_filter=['error']) %}
             {% if errors %}
                 {% for error in errors %}
-                    <div class="alert alert-danger alert-dismissible fade show shadow mx-3" role="alert" style="z-index: 1040">
+                    <div class="alert alert-danger alert-dismissible fade shadow mx-3" role="alert" style="z-index: 1040">
                         <strong>Error!</strong>: {{ error }}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
@@ -49,7 +49,7 @@
             {% with messages = get_flashed_messages(category_filter=['alert']) %}
                 {% if messages %}
                     {% for message in messages %}
-                        <div class="toast-container position-static message">
+                        <div class="toast-container position-static message" data-bs-delay="1000" data-bs-autohide="true">
                             <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
                                 <div class="toast-header">
                                     <i class="fa-regular fa-bell me-3 fa-sm"></i>                                  
