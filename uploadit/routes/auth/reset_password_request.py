@@ -5,9 +5,9 @@ from uploadit.forms import ResetPasswordRequestForm
 from uploadit.email import send_password_reset_email
 from uploadit.models import User
 from uploadit import db
-from . import user_routes
+from . import auth
 
-@user_routes.route('/reset_password_request', methods=['GET', 'POST'])
+@auth.route('/reset_password_request', methods=['GET', 'POST'])
 def reset_password_request():
     if current_user.is_authenticated:
         flash(f'You are already logged in as {current_user.username}', 'alert')
@@ -18,6 +18,6 @@ def reset_password_request():
         if user:
             send_password_reset_email(user)
         flash('Check your email for the instructions to reset your password', 'alert')
-        return redirect(url_for('users.login'))
+        return redirect(url_for('auth.login'))
     
-    return render_template('users/reset_password/reset_password_request.html', form=form)
+    return render_template('auth/reset_password/reset_password_request.html', form=form)

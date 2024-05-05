@@ -4,9 +4,9 @@ import sqlalchemy as sa
 from uploadit.forms import RegistrationForm
 from uploadit.models import User
 from uploadit import db
-from . import user_routes
+from . import auth
 
-@user_routes.route('/register', methods=['GET', 'POST'])
+@auth.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
         flash(f'You are already logged in as {current_user.username}', 'alert')
@@ -23,4 +23,4 @@ def register():
     elif not form.validate_email:
         return "Invalid Email Address", 500
     
-    return render_template('users/register.html', form=form)
+    return render_template('auth/register.html', form=form)

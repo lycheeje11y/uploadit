@@ -4,9 +4,9 @@ import sqlalchemy as sa
 from uploadit.forms import ResetPasswordForm
 from uploadit.models import User
 from uploadit import db
-from . import user_routes
+from . import auth
 
-@user_routes.route('reset_password/<token>', methods=['GET', 'POST'])
+@auth.route('reset_password/<token>', methods=['GET', 'POST'])
 def reset_password(token):
     if current_user.is_authenticated:
         flash(f'You are already logged in as {current_user.username}', 'alert')
@@ -22,6 +22,6 @@ def reset_password(token):
         db.session.commit()
         flash('You password has been reset', 'alert')
 
-        return redirect(url_for('users.login'))
+        return redirect(url_for('auth.login'))
     
-    return render_template('users/reset_password/reset_password.html', form=form)
+    return render_template('auth/reset_password/reset_password.html', form=form)

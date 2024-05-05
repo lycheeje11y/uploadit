@@ -82,7 +82,7 @@ if not app.debug:
 # LOGIN
 login_manager = LoginManager(app)
 login_manager.init_app(app)
-login_manager.login_view = 'users.login'
+login_manager.login_view = 'auth.login'
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -92,7 +92,7 @@ def load_user(user_id):
 app.register_blueprint(home_page)
 app.register_blueprint(download_page, url_prefix='/download')
 app.register_blueprint(upload_page, url_prefix='/upload')
-app.register_blueprint(user_routes, url_prefix='/u')
+app.register_blueprint(auth, url_prefix='/u')
 app.register_blueprint(favicon_page)
 
 

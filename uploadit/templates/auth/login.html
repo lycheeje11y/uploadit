@@ -3,7 +3,7 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-    <form action="{{ url_for('users.login') }}" method="post" novalidate>
+    <form action="{{ url_for('auth.login') }}" method="post" novalidate>
         {{ form.hidden_tag() }}
         <div class="form-group">
             <p>
@@ -26,8 +26,8 @@
         <p>{{ form.submit(class="btn btn-outline-secondary") }}</p>
     </form>
     <hr>
-    <p>New User? <a class="link-primary link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="{{ url_for('users.register') }}">Register Here!</a></p>
-    <a href="{{ url_for('users.reset_password_request') }}">Forgot Your Password?</a>
+    <p>New User? <a class="link-primary link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="{{ url_for('auth.register') }}">Register Here!</a></p>
+    <a href="{{ url_for('auth.reset_password_request') }}">Forgot Your Password?</a>
 
 
 {% endblock %}

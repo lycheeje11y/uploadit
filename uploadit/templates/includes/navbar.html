@@ -8,15 +8,15 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse fs-5 " id="navbarNav">
+            <div class="collapse navbar-collapse fs-5" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link link-light {{'active' if request.path == url_for('download.download')}}"
-                            aria-current="page" href="{{ url_for("download.download") }}">Download</a>
+                            aria-current="page" href="{{ url_for('download.download') }}">Download</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link link-light {{'active' if request.path == url_for('upload.upload')}}"
-                            aria-current="page" href="{{ url_for("upload.upload") }}">Upload</a>
+                            aria-current="page" href="{{ url_for('upload.upload') }}">Upload</a>
                     </li>
                     {% if current_user.is_anonymous %}
                         <li class="nav-item dropdown btn-group" style="position:absolute; right:5%; width: 10%">
@@ -24,16 +24,16 @@
                                 Login
                             </button>
                             <ul class="dropdown-menu dropdown-menu-right me-4">
-                                <li class="dropdown-item"><a class="nav-link link-dark {{'active' if request.path == url_for('users.login')}}"
-                                    aria-current="page" href="{{ url_for("users.login") }}">Login</a></li>
-                                <li class="dropdown-item"><a class="nav-link link-dark {{'active' if request.path == url_for('users.register')}}"
-                                    aria-current="page" href="{{ url_for("users.register") }}">Register</a></li>
+                                <li class="dropdown-item"><a class="nav-link link-dark {{'active' if request.path == url_for('auth.login')}}"
+                                    aria-current="page" href="{{ url_for("auth.login") }}">Login</a></li>
+                                <li class="dropdown-item"><a class="nav-link link-dark {{'active' if request.path == url_for('auth.register')}}"
+                                    aria-current="page" href="{{ url_for("auth.register") }}">Register</a></li>
                             </ul>
                         </li>
                     {% else %}
                         <li style="position:absolute; right:5%; width: 10%">
-                            <a class="nav-link me-3 text-white {{'active' if request.path == url_for('users.logout')}}"
-                            aria-current="page" href="{{ url_for("users.logout") }}" style="position:absolute; right:0;">Logout</a>
+                            <a class="nav-link me-3 text-white {{'active' if request.path == url_for('auth.logout')}}"
+                            aria-current="page" href="{{ url_for("auth.logout") }}" style="position:absolute; right:0;">Logout</a>
                         </li>
                     
                     {% endif %}
