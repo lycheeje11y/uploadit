@@ -23,10 +23,10 @@
                             <button class="btn btn-outline-primary dropdown-toggle text-white mt-1 me-4" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                 Login
                             </button>
-                            <ul class="dropdown-menu dropdown-menu-right me-4">
-                                <li class="dropdown-item"><a class="nav-link link-dark {{'active' if request.path == url_for('auth.login')}}"
-                                    aria-current="page" href="{{ url_for("auth.login") }}">Login</a></li>
-                                <li class="dropdown-item"><a class="nav-link link-dark {{'active' if request.path == url_for('auth.register')}}"
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li class="dropdown-item"><a class="dropdown-link nav-link link-dark {{'active' if request.path == url_for('auth.login')}}"
+                                aria-current="page" href="{{ url_for("auth.login") }}">Login</a></li>
+                                <li class="dropdown-item"><a class="dropdown-link nav-link link-dark {{'active' if request.path == url_for('auth.register')}}"
                                     aria-current="page" href="{{ url_for("auth.register") }}">Register</a></li>
                             </ul>
                         </li>
@@ -39,6 +39,6 @@
                     {% endif %}
                     </div>
                 </ul>
-            </div>
+        </div>
 </nav>
 

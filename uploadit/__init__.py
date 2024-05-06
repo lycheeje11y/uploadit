@@ -1,6 +1,10 @@
 from logging.handlers import SMTPHandler, RotatingFileHandler
+from dotenv import load_dotenv
 import sqlalchemy as sa
 import sqlalchemy.orm as so
+from flask_migrate import Migrate
+from flask_cors import CORS
+from flask_login import LoginManager
 import logging
 import os
 
@@ -14,7 +18,7 @@ from uploadit.config import Config
 config = Config
 app.config.from_object(config)
 
-from dotenv import load_dotenv
+
 load_dotenv()
 app.config["UPLOAD_DIRECTORY"] = os.getcwd() + '/uploads/'
 
@@ -27,20 +31,11 @@ if os.getenv("LOG_TYPE") == 'MAIL':
 from flask_mail import Mail
 mail = Mail(app)
 
-from flask_migrate import Migrate
-from flask_cors import CORS
-from flask_login import LoginManager
+
 
 
 from uploadit.database import db
 from uploadit.routes import *
-
-
-# INITIATE APP
-
-
-
-
 
 # CORS
 CORS(app)
@@ -99,3 +94,5 @@ app.register_blueprint(favicon_page)
 @app.shell_context_processor
 def make_shell_context():
     return {'sa': sa, 'so': so, 'db': db, 'mail': mail, 'User': User, 'File': File}
+
+runner = lambda : app

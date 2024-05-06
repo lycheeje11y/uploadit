@@ -14,7 +14,7 @@ window.addEventListener('DOMContentLoaded', event => {
     const toastElList = document.querySelectorAll('.toast')
     const toastList = [...toastElList].map(toastEl => new bootstrap.Toast(toastEl))
 
-    toasts.forEach(function (toast) {
+    toastElList.forEach(function (toast) {
         // Set a timeout to dismiss the toast after 5 seconds (5000 milliseconds)
         setTimeout(function () {
             var bsToast = new bootstrap.Toast(toast);

@@ -3,6 +3,7 @@ from flask import (
     request,
     flash,
     redirect,
+    abort,
     render_template,
     current_app,
     url_for,
@@ -30,6 +31,14 @@ def upload():
         except KeyError:
             return "No file chosen", 422
 
+        is_public = request.form.get('is_public')
+        if is_public == 'true':
+            is_public = True
+        elif is_public == 'false':
+            is_public = False
+        else:
+            return "Bad Request", 422
+
         file_uuid = request.form["dzuuid"]
         # Generate a unique filename to avoid overwriting using 8 chars of uuid before filename.
         secure_filename_var = f"{file_uuid[:8]}_{secure_filename(file.filename)}"
@@ -53,7 +62,7 @@ def upload():
         
         key = random_string()
         data = File(
-            filekey=key, filename=file.filename, secure_filename=secure_filename_var, uploader=current_user
+            filekey=key, filename=file.filename, secure_filename=secure_filename_var, uploader=current_user, is_public=is_public
         )
         db.session.add(data)
         db.session.commit()

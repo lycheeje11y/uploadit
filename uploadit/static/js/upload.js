@@ -13,5 +13,16 @@ Dropzone.options.dropper = {
         uploadButton.addEventListener("click", function() {
             myDropzone.processQueue();
         });
+
+        myDropzone.on('sending', function(file, xhr, formData){
+            let is_public = document.getElementById('is_public')
+
+            if (is_public.checked) {
+                formData.append('is_public', true)
+            } else {
+                formData.append('is_public', false)
+            }
+        });
     }
 }
+

@@ -4,15 +4,18 @@
             <th scope="col">Filename</th>
             <th scope="col">Key</th>
             <th scope="col">Uploader</th>
+            <th scope="col">1234</th>
         </tr>
     </thead>
     <tbody class="table-group-divider">
         {% for file in files %}
-        <tr scope="row">
-            <td class="col-3">{{ file.filename }}</td>
-            <td><span class="d-inline-block user-select-all text-truncate" style="max-width: 150px;" >{{ file.filekey }}</span></td>
-            <td>{{ file.uploader.username }}</td>
-        </tr>
+            {% if file.is_public %}
+                <tr scope="row">
+                    <td class="col-3">{{ file.filename }}</td>
+                    <td><span class="d-inline-block user-select-all text-truncate" style="max-width: 150px;" >{{ file.filekey }}</span></td>
+                    <td>{{ file.uploader.username }}</td>
+                </tr>
+            {% endif %}
         {% endfor %}
     </tbody>
 </table>

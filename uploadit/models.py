@@ -54,6 +54,7 @@ class File(db.Model):
     filekey: so.Mapped[str] = so.mapped_column(db.String(50), index=True, unique=True) 
     filename: so.Mapped[str] = so.mapped_column(db.String())
     secure_filename: so.Mapped[str] = so.mapped_column(db.String(), unique=True)
+    is_public: so.Mapped[bool] = so.mapped_column(db.Boolean())
     timestamp: so.Mapped[str] = so.mapped_column(index=True, default=lambda: datetime.now(timezone.utc))
 
     user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(User.id), index=True)    
