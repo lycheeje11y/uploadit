@@ -10,7 +10,7 @@ class Config(object):
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     ADMINS = ['your-email@example.com']
     
-    SECRET_KEY = 'THIS IS MY SECRET KEY'
+    SECRET_KEY = 'THIS IS MY VERY SECRET SECRET KEY'
 
 
     try:
